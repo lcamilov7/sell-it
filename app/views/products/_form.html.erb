@@ -1,2 +1,7 @@
-<h3>Añadir producto</h3>
-
+<%= product.new_record? ? "Add product" : "Edit product" %>
+<%= simple_form_for product do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price if product.new_record? %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

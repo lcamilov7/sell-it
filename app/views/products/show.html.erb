@@ -1,3 +1,5 @@
 <h4 class='title'><%= @product.title %></h4>
 <p class='description'><%= @product.description %></p>
 <span class='price'><%= @product.price %></span>
+<%= link_to 'Edit product', edit_product_path(@product) %>
+<%= link_to 'Delete product', product_path(@product), data: {turbo_method: :delete, turbo_confirm: 'Delete product?'} %>
