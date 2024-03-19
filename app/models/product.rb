@@ -4,5 +4,6 @@ class Product < ApplicationRecord
   validates :price, presence: true
   # validates :photo, presence: true # Causa error en tests
 
+  belongs_to :category
   has_one_attached :photo
 end

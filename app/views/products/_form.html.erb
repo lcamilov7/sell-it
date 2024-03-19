@@ -3,6 +3,7 @@
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :price if product.new_record? %>
+  <%= f.input :category_id, as: :select, collection: Category.all.order(name: :asc), label: 'Select a category' %>
   <%= f.input :photo, as: :file %>
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
