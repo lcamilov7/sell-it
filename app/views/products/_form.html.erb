@@ -3,5 +3,6 @@
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :price if product.new_record? %>
+  <%= f.input :photo, as: :file %>
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
