@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.with_attached_photo # Soluciona error n + 1 query
   end
 
   def show; end

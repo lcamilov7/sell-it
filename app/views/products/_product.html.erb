@@ -1,0 +1,5 @@
+  <%= link_to product_path(product), class: 'product' do %>
+    <%= product.title %>
+    <%= product.price %>
+    <%= cl_image_tag product.photo.key %>
+  <% end %>

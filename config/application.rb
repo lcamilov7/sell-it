@@ -23,5 +23,11 @@ module SellIt
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Available Languages
+    # config.i18n.available_locales = %i[en es]
+
+    # Language by default
+    # config.i18n.available_locale = :en
   end
 end
