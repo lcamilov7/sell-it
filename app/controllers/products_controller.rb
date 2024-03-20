@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.order(name: :asc).load_async
 
-    @pagy, @products = pagy_countless(FindProducts.new.call(params), items: 12)
+    @pagy, @products = pagy_countless(FindProducts.new.call(product_params_index), items: 12)
   end
 
   def show; end
@@ -46,5 +46,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:title, :description, :price, :photo, :category_id)
+  end
+
+  # Metodo para solo permitir recibir por params los atributos que le queremos permitir al usuario
+  def product_params_index
+    params.permit(:category_id, :min_price, :max_price, :query, :order)
   end
 end

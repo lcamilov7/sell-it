@@ -20,25 +20,27 @@ class FindProducts   # Capitulo 30 aprendev
     Product.with_attached_photo # with_attached_photo soluciona error n + 1 query
   end
 
+  # IMPORTANTISIMO PONER EL .present? O EL blank?
+  
   def filter_by_category_id(scoped, category_id)
-    return scoped unless category_id # Devolvemos los mismos productos a menos que exista un param para category_id
+    return scoped unless category_id.present? # Devolvemos los mismos productos a menos que exista un param para category_id
 
     return scoped.where(category_id: category_id)
   end
 
   def filter_by_price(scoped, min_price, max_price)
-    if min_price && max_price
+    if min_price.present? && max_price.present?
       scoped = scoped.where("price >= #{min_price} AND price <= #{max_price}")
-    elsif min_price && (max_price == false)
+    elsif min_price.present? && max_price.blank?
       scoped = scoped.where("price >= #{min_price}")
-    elsif (min_price == false) && max_price
+    elsif min_price.blank? && max_price.present?
       scoped = scoped.where("price <= #{max_price}")
     end
     return scoped
   end
 
   def filter_by_query(scoped, query)
-    return scoped unless query
+    return scoped unless query.present?
 
     return scoped.global_search(query)
   end

@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   # get '/products/:id', to: 'products#show', as: :product
   # get '/products/:id/edit', to: 'products#edit', as: :edit_product
   resources :products, path: '/'
+
+  namespace :authentication, path: '', as: '' do # nueva carpeta authentication en controllers donde estará el código de user
+    resources :users, only: %i[new create]
+  end
 end
