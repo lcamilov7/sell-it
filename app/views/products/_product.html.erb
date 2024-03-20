@@ -1,5 +1,6 @@
-  <%= link_to product_path(product), class: 'product' do %>
-    <%= product.title %>
-    <%= product.price %>
-    <%= cl_image_tag product.photo.key if product.photo.attached? %>
-  <% end %>
+<%# data turbo frame para escapar cada enlace del turbo frame %>
+<%= link_to product_path(product), class: 'product', 'data-turbo-frame': '_top' do %>
+  <%= product.title %>
+  <%= product.price %>
+  <%= cl_image_tag product.photo.key if product.photo.attached? %>
+<% end %>

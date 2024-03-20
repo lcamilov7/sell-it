@@ -2,7 +2,9 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.all.with_attached_photo.order(id: :desc) # Soluciona error n + 1 query
+    @categories = Category.order(name: :asc).load_async
+    @products = Product.with_attached_photo.order(id: :desc).load_async # Soluciona error n + 1 query
+    @products = Product.where(category_id: params[:category_id]) if params[:category_id]
   end
 
   def show; end

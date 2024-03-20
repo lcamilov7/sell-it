@@ -29,5 +29,8 @@ module SellIt
 
     # Language by default
     # config.i18n.available_locale = :en
+
+    # Allow multi query
+    config.active_record.async_query_executor = :global_thread_pool
   end
 end
