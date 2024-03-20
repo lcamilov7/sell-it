@@ -1,5 +1,5 @@
 <%# turbo frame para actualizar solo una parte de la pagina y no toda, dinamica con hotwire %>
-<%= turbo_frame_tag 'categories' do %>
+<%= turbo_frame_tag 'home' do %>
   <h4>Products</h4>
 
   <%= form_with url: products_path, method: :get do |f| %>
@@ -15,7 +15,12 @@
 
   <%= render partial: 'category', collection: @categories %>
   <%= link_to 'All', products_path %>
-  <div class='products'>
+
+  <%# haremos otro turbo frame para encapsular la navegacion independiente de los products para
+  no perder los values del form ni la categoria %>
+  <%= turbo_frame_tag "products-#{@pagy.page}", class: "products" do %>
     <%= render partial: 'product', collection: @products %>
-  </div>
+    <%# anidamos otro frame tag para poder hacer la paginacion %>
+    <%= turbo_frame_tag "products-#{@pagy.next}", class: 'products', src: pagy_url_for(@pagy, @pagy.next), loading: :lazy if @pagy.next %>
+  <% end %>
 <% end %>
