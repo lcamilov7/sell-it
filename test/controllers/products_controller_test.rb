@@ -4,20 +4,20 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test 'render a list of products' do
     get products_path
     assert_response :success
-    assert_select('.product', 3)
-    assert_select('.category', 3)
+    assert_select('.product', 12)
+    assert_select('.category', 9)
   end
 
   test 'render a list of products fileterd by category' do
     get products_path(category_id: categories(:videogames).id)
     assert_response :success
-    assert_select('.product', 2)
+    assert_select('.product', 7)
   end
 
   test 'render a list of products fileterd by price' do
     get products_path(min_price: 130, max_price: 160)
     assert_response :success
-    assert_select('.product', 1)
+    assert_select('.product', 3)
   end
 
   test 'render a list of products fileterd by search' do
@@ -26,10 +26,28 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_select('.product', 1)
   end
 
+  test 'render a list of products fileterd by expensive' do
+    get products_path(order: 'expensive')
+    assert_response :success
+    assert_select('.product', 12)
+
+    # nos encuentra el primer producto
+    assert_select('.products .product:first-child h2', 'Seat Panda clásico')
+  end
+
+  test 'render a list of products fileterd by cheap' do
+    get products_path(order: 'cheap')
+    assert_response :success
+    assert_select('.product', 12)
+
+    # nos encuentra el primer producto
+    assert_select('.products .product:first-child h2', 'El hobbit')
+  end
+
   test 'render a detailed product page' do
     get product_path(products(:ps4))
     assert_response :success
-    assert_select('.title', 'PS4 fat')
+    assert_select('.title', 'PS4 Fat')
     assert_select('.description', products(:ps4).description)
     assert_select('.price', products(:ps4).price.to_s)
   end

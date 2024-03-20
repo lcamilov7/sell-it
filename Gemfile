@@ -74,3 +74,4 @@ gem "sassc-rails"
 gem 'dotenv-rails'
 gem 'cloudinary'
 gem "pg_search"
+gem "pagy", "~> 7.0"

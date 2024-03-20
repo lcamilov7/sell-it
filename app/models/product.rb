@@ -9,4 +9,9 @@ class Product < ApplicationRecord
   belongs_to :category
   has_one_attached :photo
 
+  ORDER_BY = {
+    newest: 'created_at DESC',
+    expensive: 'price DESC',
+    cheap: 'price ASC'
+  }
 end
