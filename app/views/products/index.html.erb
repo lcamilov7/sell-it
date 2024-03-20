@@ -3,8 +3,11 @@
   <h4>Products</h4>
 
   <%= form_with url: products_path, method: :get do |f| %>
-    <%= f.number_field :min_price, placeholder: 'Min price', onChange: 'this.form.requestSubmit()' %>
-    <%= f.number_field :max_price, placeholder: 'Max price', onChange: 'this.form.requestSubmit()' %>
+    <%= f.text_field :query, placeholder: 'Search for items', onChange: 'this.form.requestSubmit()', value: params[:query] %>
+    <%= f.number_field :min_price, placeholder: 'Min price', onChange: 'this.form.requestSubmit()', value: params[:min_price] %>
+    <%= f.number_field :max_price, placeholder: 'Max price', onChange: 'this.form.requestSubmit()', value: params[:max_price] %>
+    <%= f.select :order, options_for_select({'Recents': 'newest', 'Most Expensive': 'expensive', 'Cheapest': 'cheap'}, params[:order]),
+    {}, { onChange: 'this.form.requestSubmit()' } %>
   <% end %>
 
   <%= render partial: 'category', collection: @categories %>
