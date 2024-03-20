@@ -3,8 +3,12 @@ class ProductsController < ApplicationController
 
   def index
     @categories = Category.order(name: :asc).load_async
-    @products = Product.with_attached_photo.order(id: :desc).load_async # Soluciona error n + 1 query
+    @products = Product.with_attached_photo.order(id: :desc) # Soluciona error n + 1 query
     @products = Product.where(category_id: params[:category_id]) if params[:category_id]
+
+    if params[:min_price].present?
+      @products = @products.where('price >= ?', params[:min_price]).load_async
+    end
   end
 
   def show; end

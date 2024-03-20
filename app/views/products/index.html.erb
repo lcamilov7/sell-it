@@ -1,6 +1,12 @@
 <%# turbo frame para actualizar solo una parte de la pagina y no toda, dinamica con hotwire %>
 <%= turbo_frame_tag 'categories' do %>
   <h4>Products</h4>
+
+  <%= form_with url: products_path, method: :get do |f| %>
+    <%= f.number_field :min_price, placeholder: 'Min price', onChange: 'this.form.requestSubmit()' %>
+    <%= f.number_field :max_price, placeholder: 'Max price', onChange: 'this.form.requestSubmit()' %>
+  <% end %>
+
   <%= render partial: 'category', collection: @categories %>
   <%= link_to 'All', products_path %>
   <%= render partial: 'product', collection: @products %>
