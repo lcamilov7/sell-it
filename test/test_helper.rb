@@ -11,5 +11,10 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    # Creamos este método para estar logeados antes de hacer los tests y que no se rompan
+    # por la proteccion que tenemos para usuarios no logeados
+    def login
+      post sessions_path, params: { login: users(:sara).username, password: 'testme' } # Session no es un modelo entonces no pasamos hash de modelo sino solo hash
+    end
   end
 end

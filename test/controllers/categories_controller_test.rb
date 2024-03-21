@@ -1,7 +1,8 @@
 require "test_helper"
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
-  setup do
+  def setup
+    login # Este metodo lop definimos en test_herlper.rb
     @category = categories(:videogames)
   end
 

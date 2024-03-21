@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password # Añade todos los metodos de contraseña encryptada y login y descomentamos gema bcrypt
+  has_secure_password # Añade todos los metodos de contraseña encryptada y login y descomentamos gema bcrypt, tambien permite usar el metodo authenticate en instancias de User
   has_one_attached :avatar
 
   validates :email, presence: true, uniqueness: true,
