@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   pg_search_scope(:global_search, against: { title: 'A', description: 'B' }, using: { tsearch: { prefix: true } })
 
   belongs_to :category
+  belongs_to :user, default: -> { Current.user }
   has_one_attached :photo
 
   validates :title, presence: true

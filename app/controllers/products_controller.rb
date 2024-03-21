@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    # Le asignamos el producto creado al current user desde el modelo product!
 
     if @product.save
       redirect_to(product_path(@product), notice: 'Product created')
@@ -51,6 +52,6 @@ class ProductsController < ApplicationController
 
   # Metodo para solo permitir recibir por params los atributos que le queremos permitir al usuario
   def product_params_index
-    params.permit(:category_id, :min_price, :max_price, :query, :order)
+    params.permit(:category_id, :min_price, :max_price, :query, :order, :page)
   end
 end

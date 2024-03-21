@@ -1,5 +1,7 @@
 <%= form_with(url: sessions_path) do |f| %>
-  <%= f.text_field :login %>
-  <%= f.password_field :password %>
+  <%= f.label :login %>
+  <%= f.text_field :login, required: true %>
+  <%= f.label :password %>
+  <%= f.password_field :password, required: true %>
   <%= f.button :submit %>
 <% end %>

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password # Añade todos los metodos de contraseña encryptada y login y descomentamos gema bcrypt, tambien permite usar el metodo authenticate en instancias de User
   has_one_attached :avatar
+  has_many :products, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true,
     format: {
@@ -9,7 +10,7 @@ class User < ApplicationRecord
     }
   validates :username, presence: true, uniqueness: true, length: { in: 6..15 },
     format: {
-      with: /\A[a-z-0-9-A-Z]+\z/, message: :invalid
+      with: /\A[a-z0-9A-Z]+\z/, message: :invalid
     }
   validates :password, length: { minimum: 6 }
 

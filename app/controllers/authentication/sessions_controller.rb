@@ -1,6 +1,6 @@
 class Authentication::SessionsController < ApplicationController
   skip_before_action :protect_pages
-  
+
   def new;end
 
   def create
@@ -12,5 +12,10 @@ class Authentication::SessionsController < ApplicationController
     else
       redirect_to(new_session_path, alert: 'Invalid credentials')
     end
+  end
+
+  def destroy
+    session.delete(:user_id)
+    redirect_to(products_path, notice: 'Logged out')
   end
 end
