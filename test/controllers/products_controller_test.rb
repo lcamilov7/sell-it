@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    login # Este metodo lop definimos en test_herlper.rb
+    login # Este metodo lo definimos en test_helper.rb
   end
 
   test 'render a list of products' do

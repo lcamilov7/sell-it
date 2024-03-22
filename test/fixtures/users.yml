@@ -4,13 +4,16 @@ luis:
   email: luiscamilov@erb.com
   password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
   username: lcamilov7
+  admin: false
 
 sara:
   email: ratica@gmail.erb
   password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
   username: raticavivaz4
+  admin: true
 
 pepe:
   email: pepe@mail.ht
   password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
   username: erpepe0321
+  admin: false
