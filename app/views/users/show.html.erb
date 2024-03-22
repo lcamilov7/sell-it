@@ -1,0 +1,8 @@
+<%= @user.username %>
+<%# haremos otro turbo frame para encapsular la navegacion independiente de los products para
+no perder los values del form ni la categoria %>
+<%= turbo_frame_tag "products-#{@pagy.page}", class: "products" do %>
+  <%= render partial: 'products/product', collection: @products %>
+  <%# anidamos otro frame tag para poder hacer la paginacion %>
+  <%= turbo_frame_tag "products-#{@pagy.next}", class: 'products', src: pagy_url_for(@pagy, @pagy.next), loading: :lazy if @pagy.next %>
+<% end %>

@@ -11,6 +11,7 @@ class FindProducts   # Capitulo 30 aprendev
     scoped = filter_by_category_id(scoped, params[:category_id])
     scoped = filter_by_price(scoped, params[:min_price], params[:max_price])
     scoped = filter_by_query(scoped, params[:query])
+    scoped = filter_by_user_id(scoped, params[:user_id])
     return sort(scoped, params[:order])
   end
 
@@ -21,7 +22,7 @@ class FindProducts   # Capitulo 30 aprendev
   end
 
   # IMPORTANTISIMO PONER EL .present? O EL blank?
-  
+
   def filter_by_category_id(scoped, category_id)
     return scoped unless category_id.present? # Devolvemos los mismos productos a menos que exista un param para category_id
 
@@ -43,6 +44,12 @@ class FindProducts   # Capitulo 30 aprendev
     return scoped unless query.present?
 
     return scoped.global_search(query)
+  end
+
+  def filter_by_user_id(scoped, user_id)
+    return scoped unless user_id.present? # Devolvemos los mismos productos a menos que exista un param para user_id
+
+    return scoped.where(user_id: user_id)
   end
 
   def sort(scoped, order_by)

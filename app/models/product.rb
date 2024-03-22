@@ -18,6 +18,6 @@ class Product < ApplicationRecord
   }
 
   def owner?
-    self.user.id == Current.user&.id
+    self.user.id == Current.user&.id # Es importante este & para cuando no haya un current user no salga error
   end
 end

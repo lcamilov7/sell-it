@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get 'users/show'
   # PONEMOS PRIMERO LAS RUTAS DE USER Y SESSION PORQUE ESTABA TENIENDO CONFLICTO CON LAS RUTAS DE PRODUCT
   namespace :authentication, path: '', as: '' do # nueva carpeta authentication en controllers donde estará el código de user
     resources :users, only: %i[new create], path: 'register', path_names: { new: '/' }
     resources :sessions, only: %i[new create destroy], path: 'login', path_names: { new: '/'}
   end
+
+  # ESTE SEGUNDO RESOURCES DE USERS VA AFUERA EL PRIMERO PORQUE EL PRIMERO SE DEDICA UNICAMENTE AUTENTICACION
+  resources :users, only: :show, param: :username # Asi el nombre del param sera username y no id, porque queremos buscar por username y no id
   resources :categories, except: :show
   # delete '/products/:id', to: 'products#destroy'
   # patch '/products/:id', to: 'products#update'

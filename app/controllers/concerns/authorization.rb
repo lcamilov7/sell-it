@@ -5,7 +5,7 @@ module Authorization
     class NotAuthorizedError < StandardError; end
 
     rescue_from NotAuthorizedError do
-      redirect_to(products_url, alert: 'Invalid url') # Esto hace que se redireccione a products_url cuando se invoca este error
+      redirect_to(products_url, alert: 'Invalid Url') # Esto hace que se redireccione a products_url cuando se invoca este error
     end
 
     private
