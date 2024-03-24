@@ -1,4 +1,8 @@
 class FavoritesController < ApplicationController
+  def index
+    # obtubimos los favoritos del current user en el index de favorites usando turbo frame tag y añadiendo filtro por favorites en querie de FindProduct con el param [:favorites]
+  end
+
   def create
     # Favorite.create(product_id: product.id, user: Current.user)
     # product.favorites.create(user: Current.user)

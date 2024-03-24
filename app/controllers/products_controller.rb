@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.order(name: :asc).load_async
 
-    @pagy, @products = pagy_countless(FindProducts.new.call(product_params_index), items: 12)
+    @pagy, @products = pagy_countless(FindProducts.new.call(product_params_index), items: 12) # FindProducts.new.call(product_params_index) devuelve los productos ya que el metodo call de la clase FindProducts eso devuelve
   end
 
   def show; end
@@ -56,6 +56,6 @@ class ProductsController < ApplicationController
 
   # Metodo para solo permitir recibir por params los atributos que le queremos permitir al usuario
   def product_params_index
-    params.permit(:category_id, :min_price, :max_price, :query, :order, :page)
+    params.permit(:category_id, :min_price, :max_price, :query, :order, :page, :favorites) # param favorites para el index de favorites con turframebotag
   end
 end

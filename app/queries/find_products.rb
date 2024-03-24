@@ -12,7 +12,9 @@ class FindProducts   # Capitulo 30 aprendev
     scoped = filter_by_price(scoped, params[:min_price], params[:max_price])
     scoped = filter_by_query(scoped, params[:query])
     scoped = filter_by_user_id(scoped, params[:user_id])
-    return sort(scoped, params[:order])
+    scoped = filter_by_favorites(scoped, params[:favorites])
+    results = sort(scoped, params[:order])
+    return results.where.not(user_id: Current.user&.id)
   end
 
   private
@@ -50,6 +52,12 @@ class FindProducts   # Capitulo 30 aprendev
     return scoped unless user_id.present? # Devolvemos los mismos productos a menos que exista un param para user_id
 
     return scoped.where(user_id: user_id)
+  end
+
+  def filter_by_favorites(scoped, favorites)
+    return scoped unless favorites.present? # Devolvemos los mismos productos a menos que exista un param para favorites
+
+    return scoped.joins(:favorites).where({ favorites: { user_id: Current.user.id } }) # scoped.joins(:favorites) devuelve todos los productos con favoritos y where({{}}) devuelve los favoritos que son del current user
   end
 
   def sort(scoped, order_by)
