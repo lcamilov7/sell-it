@@ -1,10 +1,13 @@
 class Product < ApplicationRecord
   include PgSearch::Model
+  include Favoritable
+
   pg_search_scope(:global_search, against: { title: 'A', description: 'B' }, using: { tsearch: { prefix: true } })
 
   belongs_to :category
   belongs_to :user, default: -> { Current.user }
   has_one_attached :photo
+  has_many :favorites, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true

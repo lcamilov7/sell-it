@@ -4,6 +4,10 @@ class ProductPolicy < BasePolicy
     record.owner?
   end
 
+  # def show
+  #   record.status
+  # end
+
   def update
     record.owner?
   end
