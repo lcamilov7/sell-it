@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.order(name: :asc).load_async
 
-    @pagy, @products = pagy_countless(FindProducts.new.call(product_params_index), items: 12) # FindProducts.new.call(product_params_index) devuelve los productos ya que el metodo call de la clase FindProducts eso devuelve
+    #@pagy, @products = pagy_countless(FindProducts.new.call(product_params_index), items: 12) # FindProducts.new.call(product_params_index) devuelve los productos ya que el metodo call de la clase FindProducts eso devuelve
   end
 
   def show; end

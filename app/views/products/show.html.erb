@@ -3,7 +3,7 @@
 <%= cl_image_tag @product.photo.key if @product.photo.attached? %>
 <span class='price'><%= @product.price %></span>
 
-<%= render 'favorite', locals: { product: @product} %>
+<%= render 'favorite', product: @product %>
 
 <%= link_to 'Edit product', edit_product_path(@product) if @product.owner? %>
 <%# El link de delete lo hicimos convencionalmente como se hace un metodo destroy aunque no estamos buscadno nada en la base de datos,

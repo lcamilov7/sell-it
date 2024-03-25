@@ -7,7 +7,7 @@ module Favoritable
     end
 
     def find_favorite
-      self.favorites.find_by(user_id: Current.user.id)
+      self.favorites.find_by(user_id: Current.user&.id)
     end
 
     def unfavorite! # Exclamación significa que vamos a hacer cambios
