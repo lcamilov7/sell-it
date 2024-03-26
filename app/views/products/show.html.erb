@@ -1,17 +1,12 @@
 <h4 class='title'><%= @product.title %></h4>
 <p class='description'></p><%= @product.description %>
+
 <%= cl_image_tag @product.photo.key if @product.photo.attached? %>
 <span class='price'><%= @product.price %></span>
 
-<% if @product.user != Current.user %>
-  <% if @product.find_favorite %>
-    <%= link_to 'Remove Favorite', favorite_path(@product.id), data: { turbo_method: :delete } %><%# el param pasado a la ruta favorite_path no se llamara params[:id] sino params[:product_id] porque asi lo definimos en la ruta, el metodo destroy necesita que le pasemos un id en los param pero est vez ese id se llama product_id porque lo renombramos en routes %>
-  <% else %>
-    <%= link_to 'Favorite', favorites_path(product_id: @product.id), data: { turbo_method: :post } %> <%# AQUI DEBEMOS PASAR EL PARAM COMO product_id:%>
-  <% end %>
-<% end %>
-<%= link_to 'Edit product', edit_product_path(@product) if @product.owner? %>
+<%= render 'favorite', product: @product %>
 
+<%= link_to 'Edit product', edit_product_path(@product) if @product.owner? %>
 <%# El link de delete lo hicimos convencionalmente como se hace un metodo destroy aunque no estamos buscadno nada en la base de datos,
 tambien se podia llamar un metodo que hiciera lo mismo que hace el metodo destroy pero lo dejamos asi por convención
 tampoco habria que pasarle parametros al otro metodo que hiciera lo mismo pero aca si se los pasamos por convención un metodo destroy necesita un parametro %>

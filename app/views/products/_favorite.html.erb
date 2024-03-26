@@ -1,0 +1,9 @@
+<div id='favorite'><%# Este es eldiv y id que buscará el turbo stream en favorites controller TIENE QUE ESTAR DENTRO DEL PARTIAL%>
+  <% if product.user != Current.user %>
+    <% if product.find_favorite %>
+      <%= link_to 'Remove Favorite', favorite_path(product.id), data: { turbo_method: :delete } %><%# el param pasado a la ruta favorite_path no se llamara params[:id] sino params[:product_id] porque asi lo definimos en la ruta, el metodo destroy necesita que le pasemos un id en los param pero est vez ese id se llama product_id porque lo renombramos en routes %>
+    <% else %>
+      <%= link_to 'Favorite', favorites_path(product_id: product.id), data: { turbo_method: :post } %> <%# AQUI DEBEMOS PASAR EL PARAM COMO product_id:%>
+    <% end %>
+  <% end %>
+</div>

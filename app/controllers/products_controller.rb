@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :product, only: %i[show edit update destroy]
   skip_before_action :protect_pages, only: %i[index show]
 
   def index
@@ -46,8 +46,8 @@ class ProductsController < ApplicationController
 
   private
 
-  def set_product
-    @product = Product.find(params[:id])
+  def product
+    @product ||= Product.find(params[:id]) # Memoization para no tener que hacer una consulta a la base de datos cada vez que invoamos el metodo product
   end
 
   def product_params
@@ -56,6 +56,6 @@ class ProductsController < ApplicationController
 
   # Metodo para solo permitir recibir por params los atributos que le queremos permitir al usuario
   def product_params_index
-    params.permit(:category_id, :min_price, :max_price, :query, :order, :page, :favorites) # param favorites para el index de favorites con turframebotag
+    params.permit(:category_id, :min_price, :max_price, :query, :order, :page, :favorites, :user_id) # param favorites para el index de favorites con turframebotag, lo mismo para :user_id para el show de user
   end
 end
