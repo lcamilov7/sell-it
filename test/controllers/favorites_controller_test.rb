@@ -7,6 +7,11 @@ class FavoritesControllerTest < ActionDispatch::IntegrationTest
     @switch = products(:switch)
   end
 
+  test 'should show user favorites' do
+    get favorites_url(favorites: true)
+    assert_response(:success)
+  end
+
   test 'should create a favorite' do
     assert_difference('Favorite.count') do
       post favorites_url(product_id: @ps4.id)

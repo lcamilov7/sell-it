@@ -16,7 +16,6 @@
   <%= render partial: 'category', collection: @categories %>
   <%= link_to 'All', products_path %>
 
-
   <%= turbo_frame_tag :products do %> <%# Este turbo frame_tag es para renderizar los productos en el index de favorites %>
     <%# haremos otro turbo frame para encapsular la navegacion independiente de los products para
     no perder los values del form ni la categoria %>

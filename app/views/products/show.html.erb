@@ -1,5 +1,5 @@
 <h4 class='title'><%= @product.title %></h4>
-<p class='description'><%= @product.description %></p>
+<p class='description'></p><%= @product.description %>
 <%= cl_image_tag @product.photo.key if @product.photo.attached? %>
 <span class='price'><%= @product.price %></span>
 
